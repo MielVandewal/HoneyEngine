@@ -48,7 +48,7 @@ void HoneyEngine::SceneManager::SetActiveScene(const std::string& name)
 	for (size_t i{ 0 }; i < m_Scenes.size(); ++i)
 	{
 		if (m_Scenes[i]->m_Name == name)
-			m_ActiveSceneNr = i;
+			m_ActiveSceneNr = int(i);
 	}
 }
 

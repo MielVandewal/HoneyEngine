@@ -1,12 +1,15 @@
 #include "Application.h"
 #include "SceneManager.h"
 #include "InputManager.h"
+#include "Logger.h"
+#include "Window.h"
 
 const float HoneyEngine::Application::m_SecPerFrame = 0.016f;
 
-void HoneyEngine::Application::Initialize(const std::string name, const int width, const int height)
+void HoneyEngine::Application::Initialize(HINSTANCE hInstance, const LPCWSTR& name, const int width, const int height)
 {
-	InputManager::GetInstance()->Initialize(); 
+    Window::GetInstance()->Initialize(hInstance, name, width, height);
+	InputManager::GetInstance()->Initialize();
 }
 
 void HoneyEngine::Application::Run()
@@ -28,6 +31,8 @@ void HoneyEngine::Application::Run()
             SceneManager::GetInstance()->FixedUpdate(m_SecPerFrame);
             lag -= m_SecPerFrame;
 
+            if (InputManager::GetInstance()->IsKeyDown(VK_SPACE))
+                Logger::GetInstance()->LogInfo(L"Test", true);
             if (InputManager::GetInstance()->IsKeyDown(VK_ESCAPE))
                 doContinue = false;
         }

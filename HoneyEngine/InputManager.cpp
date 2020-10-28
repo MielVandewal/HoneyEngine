@@ -1,5 +1,6 @@
 #include "HoneyEnginePCH.h"
 #include "InputManager.h"
+#include "Window.h"
 
 HoneyEngine::InputManager::InputManager()
 	: m_pKeyboardState{ nullptr, nullptr }
@@ -78,15 +79,13 @@ void HoneyEngine::InputManager::Update()
 		}
 	}
 
-	////Set Mouse Position
-	//m_OldMousePosition = m_CurrMousePosition;
-	//if (GetCursorPos(&m_CurrMousePosition))
-	//{
-	//	ScreenToClient(GetWindowHandle, &m_CurrMousePosition);
-	//}
+	//Set Mouse Position
+	m_OldMousePos = m_CurrMousePos;
+	if (GetCursorPos(&m_CurrMousePos))
+		ScreenToClient(Window::GetInstance()->GetWindowHandle(), &m_CurrMousePos);
 
-	//m_MouseMovement.x = m_CurrMousePosition.x - m_OldMousePosition.x;
-	//m_MouseMovement.y = m_CurrMousePosition.y - m_OldMousePosition.y;
+	m_MouseMovement.x = m_CurrMousePos.x - m_OldMousePos.x;
+	m_MouseMovement.y = m_CurrMousePos.y - m_OldMousePos.y;
 }
 
 bool HoneyEngine::InputManager::IsKeyDown(const int key, const bool previousFrame) const

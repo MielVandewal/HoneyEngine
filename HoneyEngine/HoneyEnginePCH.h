@@ -10,6 +10,8 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <winerror.h>
+#include <wrl.h>
+#include <dxgi1_5.h>
 #include "../Libs/d3dx12.h"
 
 template<class T>
