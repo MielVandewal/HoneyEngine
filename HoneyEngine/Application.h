@@ -7,11 +7,7 @@ namespace HoneyEngine
 	class Application
 	{
 	public:
-        Application(bool useWarp)
-            : m_UseWarp(useWarp)
-        {};
-        ~Application() {};
-        void Initialize(HINSTANCE hInstance, const LPCWSTR& name, const int width, const int height);
+        void Initialize(HINSTANCE hInstance, const LPCWSTR& name, const int width, const int height, const bool useWarp = false);
         void Cleanup();
         void Run();
 
@@ -19,9 +15,10 @@ namespace HoneyEngine
         Microsoft::WRL::ComPtr<IDXGIAdapter4> GetAdapter();
         Microsoft::WRL::ComPtr<ID3D12Device2> CreateDevice(); 
         Microsoft::WRL::ComPtr<ID3D12CommandQueue> CreateCommandQueue();
+        void EnableDebugLayer();
 
         static const float m_SecPerFrame;
-        const bool m_UseWarp;
+        bool m_UseWarp;
 	};
 }
 

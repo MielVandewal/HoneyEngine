@@ -6,9 +6,13 @@
 
 const float HoneyEngine::Application::m_SecPerFrame = 0.016f;
 
-void HoneyEngine::Application::Initialize(HINSTANCE hInstance, const LPCWSTR& name, const int width, const int height)
+void HoneyEngine::Application::Initialize(HINSTANCE hInstance, const LPCWSTR& name, const int width, const int height, const bool useWarp)
 {
+    EnableDebugLayer();
+    m_UseWarp = useWarp;
+
     InputManager::GetInstance()->Initialize();
+
     GameContext* gameContext = GameContext::GetInstance();
     gameContext->pDevice = CreateDevice();
     gameContext->pCommandQueue = CreateCommandQueue();
@@ -40,10 +44,19 @@ void HoneyEngine::Application::Run()
                 doContinue = false;
         }
         SceneManager::GetInstance()->Render();
+        GameContext::GetInstance()->pWindow->Render();
 
     }
 
     Cleanup();
+}
+
+void HoneyEngine::Application::Cleanup()
+{
+    SceneManager::Release();
+    InputManager::Release();
+    GameContext::Release();
+    Logger::Release();
 }
 
 Microsoft::WRL::ComPtr<IDXGIAdapter4> HoneyEngine::Application::GetAdapter()
@@ -147,8 +160,14 @@ Microsoft::WRL::ComPtr<ID3D12CommandQueue> HoneyEngine::Application::CreateComma
     return d3d12CommandQueue;
 }
 
-void HoneyEngine::Application::Cleanup()
+void HoneyEngine::Application::EnableDebugLayer()
 {
-    SceneManager::Release();
-    InputManager::Release();
+#if defined(_DEBUG)
+    // Always enable the debug layer before doing anything DX12 related
+    // so all possible errors generated while creating DX12 objects
+    // are caught by the debug layer.
+    Microsoft::WRL::ComPtr<ID3D12Debug> debugInterface;
+    ThrowIfFailed(D3D12GetDebugInterface(IID_PPV_ARGS(&debugInterface)));
+    debugInterface->EnableDebugLayer();
+#endif
 }
