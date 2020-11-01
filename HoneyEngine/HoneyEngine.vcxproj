@@ -141,24 +141,31 @@
   <ItemGroup>
     <ClInclude Include="..\Libs\d3dx12.h" />
     <ClInclude Include="BaseComponent.h" />
+    <ClInclude Include="CameraComponent.h" />
+    <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="VertexStructs.h" />
     <ClInclude Include="HoneyEnginePCH.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="Parser.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="TransfromComponent.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseComponent.cpp" />
+    <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="TransfromComponent.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -45,6 +45,21 @@
       <Filter>Helpers</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="Parser.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TransfromComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexStructs.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameContext.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseComponent.cpp">
@@ -65,5 +80,11 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TransfromComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

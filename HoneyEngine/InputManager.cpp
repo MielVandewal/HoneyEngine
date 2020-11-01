@@ -1,6 +1,6 @@
 #include "HoneyEnginePCH.h"
 #include "InputManager.h"
-#include "Window.h"
+#include "GameContext.h"
 
 HoneyEngine::InputManager::InputManager()
 	: m_pKeyboardState{ nullptr, nullptr }
@@ -82,7 +82,7 @@ void HoneyEngine::InputManager::Update()
 	//Set Mouse Position
 	m_OldMousePos = m_CurrMousePos;
 	if (GetCursorPos(&m_CurrMousePos))
-		ScreenToClient(Window::GetInstance()->GetWindowHandle(), &m_CurrMousePos);
+		ScreenToClient(GameContext::GetInstance()->pWindow->GetWindowHandle(), &m_CurrMousePos);
 
 	m_MouseMovement.x = m_CurrMousePos.x - m_OldMousePos.x;
 	m_MouseMovement.y = m_CurrMousePos.y - m_OldMousePos.y;

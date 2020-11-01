@@ -11,7 +11,11 @@
 #include <windows.h>
 #include <winerror.h>
 #include <wrl.h>
-#include <dxgi1_5.h>
+
+#include <d3d12.h>
+#include <dxgi1_6.h>
+#include <d3dcompiler.h>
+#include <DirectXMath.h>
 #include "../Libs/d3dx12.h"
 
 template<class T>
@@ -31,5 +35,14 @@ void SafeDeleteArray(T& toDelete)
     {
         delete[] toDelete;
         toDelete = nullptr;
+    }
+}
+
+
+inline void ThrowIfFailed(HRESULT hr)
+{
+    if (FAILED(hr))
+    {
+        throw std::exception();
     }
 }
