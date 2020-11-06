@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -145,6 +145,7 @@
     <ClInclude Include="GameContext.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="ModelComponent.h" />
     <ClInclude Include="VertexStructs.h" />
     <ClInclude Include="HoneyEnginePCH.h" />
     <ClInclude Include="InputManager.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="ModelComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TransfromComponent.cpp" />

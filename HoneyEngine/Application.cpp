@@ -31,15 +31,13 @@ void HoneyEngine::Application::Run()
         float deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
         lastTime = currentTime;
         lag += deltaTime;
-        SceneManager::GetInstance()->Update(deltaTime);
+        SceneManager::GetInstance()->Update();
         while (lag >= m_SecPerFrame)
         {
             InputManager::GetInstance()->Update();
-            SceneManager::GetInstance()->FixedUpdate(m_SecPerFrame);
+            SceneManager::GetInstance()->FixedUpdate();
             lag -= m_SecPerFrame;
 
-            if (InputManager::GetInstance()->IsKeyDown(VK_SPACE))
-                Logger::GetInstance()->LogInfo(L"Test", true);
             if (InputManager::GetInstance()->IsKeyDown(VK_ESCAPE))
                 doContinue = false;
         }

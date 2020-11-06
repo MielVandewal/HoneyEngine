@@ -52,16 +52,16 @@ void HoneyEngine::SceneManager::SetActiveScene(const std::string& name)
 	}
 }
 
-void HoneyEngine::SceneManager::Update(const float deltaT)
+void HoneyEngine::SceneManager::Update()
 {
 	if (m_ActiveSceneNr != -1)
-		m_Scenes[m_ActiveSceneNr]->Update(deltaT);
+		m_Scenes[m_ActiveSceneNr]->Update();
 }
 
-void HoneyEngine::SceneManager::FixedUpdate(const float deltaT)
+void HoneyEngine::SceneManager::FixedUpdate()
 {
 	if (m_ActiveSceneNr != -1)
-		m_Scenes[m_ActiveSceneNr]->FixedUpdate(deltaT);
+		m_Scenes[m_ActiveSceneNr]->FixedUpdate();
 }
 
 void HoneyEngine::SceneManager::Render() const

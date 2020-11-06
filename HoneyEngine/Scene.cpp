@@ -32,19 +32,19 @@ void HoneyEngine::Scene::RemoveGameObject(GameObject* pObject)
 	}
 }
 
-void HoneyEngine::Scene::Update(const float deltaT)
+void HoneyEngine::Scene::Update()
 {
 	for (GameObject* gameObject : m_Objects)
 	{
-		gameObject->Update(deltaT);
+		gameObject->Update();
 	}
 }
 
-void HoneyEngine::Scene::FixedUpdate(const float deltaT)
+void HoneyEngine::Scene::FixedUpdate()
 {
 	for (GameObject* gameObject : m_Objects)
 	{
-		gameObject->FixedUpdate(deltaT);
+		gameObject->FixedUpdate();
 	}
 }
 

@@ -60,6 +60,9 @@
     <ClInclude Include="GameContext.h">
       <Filter>Helpers</Filter>
     </ClInclude>
+    <ClInclude Include="ModelComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseComponent.cpp">
@@ -84,6 +87,9 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="TransfromComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>

@@ -15,6 +15,7 @@ namespace HoneyEngine
         void Flush();
 
         HWND GetWindowHandle() const { return m_Hwnd; }
+        const float GetAspectRatio() const { return float(m_WindowWidth) / m_WindowHeight; }
         const int GetWindowWidth() const { return m_WindowWidth; }
         const int GetWindowHeight() const { return m_WindowHeight; }
         static LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);

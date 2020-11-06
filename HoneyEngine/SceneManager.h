@@ -16,8 +16,8 @@ namespace HoneyEngine
 		void SetActiveScene(const std::string& name);
 		Scene* GetActiveScene() { return m_Scenes[m_ActiveSceneNr]; }
 
-		void Update(const float deltaT);
-		void FixedUpdate(const float deltaT);
+		void Update();
+		void FixedUpdate();
 		void Render() const;
 
 	private:

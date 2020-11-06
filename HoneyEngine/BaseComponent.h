@@ -1,4 +1,6 @@
 #pragma once
+#include "GameObject.h"
+
 namespace HoneyEngine
 {
 	class BaseComponent
@@ -14,7 +16,7 @@ namespace HoneyEngine
 		BaseComponent& operator=(const BaseComponent& other) = delete;
 		BaseComponent& operator=(BaseComponent&& other) = delete;
 
-		virtual void Update(float) {}
+		virtual void Update() {}
 		virtual void Render() const {}
 
 	protected:

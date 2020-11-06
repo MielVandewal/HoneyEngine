@@ -3,6 +3,7 @@
 
 HoneyEngine::GameObject::GameObject()
 	: m_IsActive(true)
+	, m_pTransformComponent(nullptr)
 {
 }
 
@@ -14,23 +15,23 @@ HoneyEngine::GameObject::~GameObject()
 	}
 }
 
-void HoneyEngine::GameObject::FixedUpdate(const float deltaT)
+void HoneyEngine::GameObject::FixedUpdate()
 {
 	if (!m_IsActive)
 		return;
 	for (size_t i{}; i < m_Components.size(); ++i)
 	{
-		m_Components[i]->Update(deltaT);
+		m_Components[i]->Update();
 	}
 }
 
-void HoneyEngine::GameObject::Update(const float deltaT)
+void HoneyEngine::GameObject::Update()
 {
 	if (!m_IsActive)
 		return;
 	for (size_t i{}; i < m_Components.size(); ++i)
 	{
-		m_Components[i]->Update(deltaT);
+		m_Components[i]->Update();
 	}
 }
 

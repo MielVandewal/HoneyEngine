@@ -71,12 +71,9 @@ void HoneyEngine::InputManager::Update()
 		//if the triggerstate is equals to pressed/1.
 		//the second part of this if statement checks the current frame and will return false 
 		//if the triggerstate is equals to released/0.
-		bool test1 = bool((int(currAction->m_TriggerState) % 2)) != IsKeyDown(currAction->m_KeyCode, true);
-		bool test2 = (bool(currAction->m_TriggerState) == IsKeyDown(currAction->m_KeyCode));
-		if (test1 && test2)
-		{
+		if (((int(currAction->m_TriggerState) & 1)) != IsKeyDown(currAction->m_KeyCode, true)
+			&& bool(int(currAction->m_TriggerState) & 2) != IsKeyDown(currAction->m_KeyCode))
 			currAction->m_IsTriggered = true;
-		}
 	}
 
 	//Set Mouse Position

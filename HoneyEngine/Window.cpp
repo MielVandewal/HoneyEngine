@@ -88,45 +88,40 @@ void HoneyEngine::Window::Render()
 	m_pCommandList->Reset(commandAllocator.Get(), nullptr);
 
 	// Clear the render target.
-	{
-		CD3DX12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
-			backBuffer.Get(),
-			D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+	CD3DX12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
+		backBuffer.Get(),
+		D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 
-		m_pCommandList->ResourceBarrier(1, &barrier);
+	m_pCommandList->ResourceBarrier(1, &barrier);
 
-		FLOAT clearColor[] = { 0.4f, 0.6f, 0.9f, 1.0f };
-		CD3DX12_CPU_DESCRIPTOR_HANDLE rtv(m_pRTVDescriptorHeap->GetCPUDescriptorHandleForHeapStart(),
-			currBackBufferIdx, m_RTVDescriptorSize);
+	FLOAT clearColor[] = { 0.4f, 0.6f, 0.9f, 1.0f };
+	CD3DX12_CPU_DESCRIPTOR_HANDLE rtv(m_pRTVDescriptorHeap->GetCPUDescriptorHandleForHeapStart(),
+		currBackBufferIdx, m_RTVDescriptorSize);
 
-		m_pCommandList->ClearRenderTargetView(rtv, clearColor, 0, nullptr);
-	}
+	m_pCommandList->ClearRenderTargetView(rtv, clearColor, 0, nullptr);
 
 	// Present
+	barrier = CD3DX12_RESOURCE_BARRIER::Transition(backBuffer.Get(),
+		D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+	m_pCommandList->ResourceBarrier(1, &barrier);
+
+	ThrowIfFailed(m_pCommandList->Close());
+
+	ID3D12CommandList* const commandLists[] =
 	{
-		CD3DX12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(backBuffer.Get(),
-			D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
-		m_pCommandList->ResourceBarrier(1, &barrier);
+		m_pCommandList.Get()
+	};
 
-		ThrowIfFailed(m_pCommandList->Close());
+	GameContext::GetInstance()->pCommandQueue->ExecuteCommandLists(_countof(commandLists), commandLists);
 
-		ID3D12CommandList* const commandLists[] =
-		{
-			m_pCommandList.Get()
-		};
+	UINT syncInterval = m_VSync ? 1 : 0;
+	UINT presentFlags = m_IsTearingSupported && !m_VSync ? DXGI_PRESENT_ALLOW_TEARING : 0;
+	ThrowIfFailed(m_pSwapChain->Present(syncInterval, presentFlags));
 
-		GameContext::GetInstance()->pCommandQueue->ExecuteCommandLists(_countof(commandLists), commandLists);
+	m_FrameFenceValues[currBackBufferIdx] = Signal();
+	currBackBufferIdx = m_pSwapChain->GetCurrentBackBufferIndex();
 
-		UINT syncInterval = m_VSync ? 1 : 0;
-		UINT presentFlags = m_IsTearingSupported && !m_VSync ? DXGI_PRESENT_ALLOW_TEARING : 0;
-		ThrowIfFailed(m_pSwapChain->Present(syncInterval, presentFlags));
-
-		m_FrameFenceValues[currBackBufferIdx] = Signal();
-		currBackBufferIdx = m_pSwapChain->GetCurrentBackBufferIndex();
-
-		WaitForFenceValue(m_FrameFenceValues[currBackBufferIdx]);
-
-	}
+	WaitForFenceValue(m_FrameFenceValues[currBackBufferIdx]);
 }
 
 uint64_t HoneyEngine::Window::Signal()

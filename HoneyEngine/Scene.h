@@ -22,8 +22,8 @@ namespace HoneyEngine
 		void AddGameObject(GameObject* object);
 		void RemoveGameObject(GameObject* object = nullptr);
 
-		void Update(const float deltaT);
-		void FixedUpdate(const float deltaT);
+		void Update();
+		void FixedUpdate();
 		void Render() const;
 
 	private:

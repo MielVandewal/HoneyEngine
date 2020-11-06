@@ -4,6 +4,7 @@
 namespace HoneyEngine
 {
 	class BaseComponent;
+	class TransformComponent;
 
 	class GameObject final
 	{
@@ -16,8 +17,8 @@ namespace HoneyEngine
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 
-		void FixedUpdate(const float deltaT);
-		void Update(const float deltaT);
+		void FixedUpdate();
+		void Update();
 		void Render() const;
 
 		void AddComponent(BaseComponent* pComponent);
@@ -29,6 +30,7 @@ namespace HoneyEngine
 
 	private:
 		std::vector<BaseComponent*> m_Components;
+		TransformComponent* m_pTransformComponent;
 		bool m_IsActive;
 	};
 }
